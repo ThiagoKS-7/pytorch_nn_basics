@@ -3,14 +3,6 @@ from typing import List
 
 
 def mostra_tipos(lista: List) -> None:
-    """
-    É possivel criar tensores do PyTorch de inúmeras formas!
-    Vamos ver o primeiro os tipos de tensores que estão ao nosso dispor.
-    Para isso, vamos converter comns do Python em tensors do PyTorch
-
-    Note que a impressão de tensores dos tipos float32 e int64 n vem acompanhadas de tipo
-    dtype, visto que se tratam de tipos padrão do Pytorch
-    """
     tns = torch.Tensor(lista)
     tns2 = torch.FloatTensor(lista)
     tns3 = torch.DoubleTensor(lista)
@@ -27,7 +19,7 @@ def mostra_tipos(lista: List) -> None:
     print(tns4)
 
 
-def instancias_a_partir_do_np() -> None:
+def instancias_a_partir_do_np():
     import numpy as np
 
     arr = np.random.rand(3, 4)
@@ -37,7 +29,7 @@ def instancias_a_partir_do_np() -> None:
     print(f"{tns} - {tns.dtype}")
 
 
-def tensores_ja_inicializados() -> None:
+def tensores_ja_inicializados():
     print("\n Tensores já inicializados")
     tns1 = torch.ones(2, 3)  # tensor preenchido de .1 do tamanho 2 de [3]
     print(f" Tensores .ones - {tns1}")
@@ -49,32 +41,20 @@ def tensores_ja_inicializados() -> None:
     )  # tensor prenechido de valores aleatórios, tamanho 3 de [2]
 
 
-def tensor_p_numpy() -> None:
+def tensor_p_numpy():
     tnsr = torch.randn(3, 2)
     print(type(tnsr))
     arr = tnsr.data.numpy()
     print(type(arr))
 
 
-def indexao(tensor) -> None:
+def indexao(tensor):
     print(f"\nExemplo indexao")
     tensor = torch.Tensor(tensor)
-    print(f"tensor não fatiado {tensor}")
-    tensor[0, 2] = -10  # tensor 0D
-    print(f"tensor com indice editado {tensor}")
-    print(f"tensor fatiado {tensor[:, 2]}")
-    print(f"tensor 0D {tensor[0,2]} - size {tensor[0,2].size()}")
-
-
-def operacoes() -> None:
-    tnsr = torch.randn(3, 2)
-    tns1 = torch.ones(2, 2)
-    tns = tnsr[0:2, :]
-    soma = tns + tns1
-    divisao = tns / tns1
-    print(f"\nExemplo operações")
-    print(f"soma tensores {soma}")
-    print(f"divisao tensores {divisao}")
+    print(f"{tensor}")
+    tensor[0, 2] = -10
+    print(type(tensor))
+    print(tensor)
 
 
 if __name__ == "__main__":
@@ -85,4 +65,3 @@ if __name__ == "__main__":
     tensores_ja_inicializados()
     tensor_p_numpy()
     indexao(lista)
-    operacoes()

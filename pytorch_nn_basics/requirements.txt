@@ -1,1 +1,1 @@
-pytorch
+torch==2.1.0+cu118
