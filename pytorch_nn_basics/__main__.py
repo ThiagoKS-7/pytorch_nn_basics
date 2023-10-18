@@ -67,14 +67,49 @@ def indexao(tensor) -> None:
 
 
 def operacoes() -> None:
+    """
+    A função .item() extrai o número de um tensor que possui um único valor,
+    permitindo realizar as operações numéricas do Python.
+    Caso o item não seja extraído,
+    operaçãoes que envoplvam tensores vão retornar novos tensores.
+    """
     tnsr = torch.randn(3, 2)
     tns1 = torch.ones(2, 2)
-    tns = tnsr[0:2, :]
+    tns = tnsr[:1, :]
     soma = tns + tns1
     divisao = tns / tns1
+    mult = torch.mm(tns, tns1)
     print(f"\nExemplo operações")
+    print(f"Shape tensores - {tnsr.T.shape}\n{tns1.shape}")
     print(f"soma tensores {soma}")
+    print(f"multiplicação {mult}")
     print(f"divisao tensores {divisao}")
+
+
+def size_e_view() -> None:
+    """
+    Uma operação importantíssima na manipulação	 de tensores para Deep Learning é a reorganização das suas dimensões.
+    Dessa forma é possível linearizar um tensor n-dimensional
+    """
+    tnsr = torch.randn(3, 2)
+    tns = torch.randn(2, 2, 3)
+    print(f"\nExemplo .size()")
+    print(f"Size - {tnsr.size()}")
+    print(f"Size tensor 3D {tnsr.size()}")
+    print(f"\nExemplo .view()")
+    print(f"{tns.view(-1)}")
+    print(f"{tns.view(tns.size(0), -1)}")
+
+
+def cast_gpu() -> None:
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
+    print(device)
+    tns = torch.randn(10)
+    tns = tns.to(device)
+    print(tns)
 
 
 if __name__ == "__main__":
@@ -86,3 +121,5 @@ if __name__ == "__main__":
     tensor_p_numpy()
     indexao(lista)
     operacoes()
+    size_e_view()
+    cast_gpu()
