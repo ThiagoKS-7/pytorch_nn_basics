@@ -112,6 +112,18 @@ def cast_gpu() -> None:
     print(tns)
 
 
+def exercicio() -> None:
+    """
+    No exemplo isso funciona pq eles partiram de um tensor de mesma dimensionalidade
+    """
+    tns = torch.randn(9, 12)
+    tns1 = tns[0:5, 0:4]
+    tns2 = tns[5:, 4:]
+
+    resultado = torch.mm(tns1, tns2)
+    print(resultado.size())
+
+
 if __name__ == "__main__":
     lista = [[1, 2, 3], [4, 5, 6]]  # tensor 2 de [3]
     print(f"Is CUDA available? - {torch.cuda.is_available()}\n")
@@ -123,3 +135,4 @@ if __name__ == "__main__":
     operacoes()
     size_e_view()
     cast_gpu()
+    exercicio()
