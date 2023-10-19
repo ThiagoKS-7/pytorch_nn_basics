@@ -11,34 +11,32 @@ def mostra_tipos(lista: List) -> None:
     Note que a impressão de tensores dos tipos float32 e int64 n vem acompanhadas de tipo
     dtype, visto que se tratam de tipos padrão do Pytorch
     """
-    tns = torch.Tensor(lista)
-    tns2 = torch.FloatTensor(lista)
-    tns3 = torch.DoubleTensor(lista)
-    tns4 = torch.LongTensor(lista)
+    tipos_tensores = {
+        "padrao": torch.Tensor(lista),
+        "float": torch.FloatTensor(lista),
+        "double": torch.DoubleTensor(lista),
+        "long": torch.LongTensor(lista)
+    }
 
     print("\n Padrões de tensores")
-    print(f"Padrão (Float 32) - {tns.dtype}")
-    print(tns)
-    print(f"Float 32- {tns2.dtype}")
-    print(tns2)
-    print(f"Double - {tns3.dtype}")
-    print(tns)
-    print(f"Int (Long) - {tns4.dtype}")
-    print(tns4)
+    for key in tipos_tensores:
+        print(F"{key.capitalize()} ({tipos_tensores[key].dtype})\n{tipos_tensores[key]}\n")
 
 
 def instancias_a_partir_do_np() -> None:
     import numpy as np
-
-    arr = np.random.rand(3, 4)
-    tns = torch.from_numpy(arr)
+    
+    instancias_numpy = {
+        "random":   np.random.rand(3, 4),
+        "torch_from_numpy": torch.from_numpy(np.random.rand(3, 4))
+    }
     print("\n Instâncias vindas do Numpy")
-    print(f"{arr} - {arr.dtype}")
-    print(f"{tns} - {tns.dtype}")
+    for key in instancias_numpy:
+        print(f"{key.capitalize()} - ({instancias_numpy[key].dtype})\n {instancias_numpy[key]}\n")
 
 
 def tensores_ja_inicializados() -> None:
-    print("\n Tensores já inicializados")
+    print("\n Tensores inicializados com valores padrão")
     tns1 = torch.ones(2, 3)  # tensor preenchido de .1 do tamanho 2 de [3]
     print(f" Tensores .ones - {tns1}")
     tns2 = torch.zeros(4, 3)  # tensor preenchido de 0 do tamanho 4 de [3]
