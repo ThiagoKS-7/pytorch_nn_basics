@@ -3,13 +3,16 @@ from typing import List
 
 
 def mostra_tipos(lista: List) -> None:
-    """
+    """_summary_
     É possivel criar tensores do PyTorch de inúmeras formas!
     Vamos ver o primeiro os tipos de tensores que estão ao nosso dispor.
     Para isso, vamos converter comns do Python em tensors do PyTorch
 
     Note que a impressão de tensores dos tipos float32 e int64 n vem acompanhadas de tipo
     dtype, visto que se tratam de tipos padrão do Pytorch
+    
+    Args:
+        lista (List): lista a ser convertida em tensor
     """
     tipos_tensores = {
         "padrao": torch.Tensor(lista),
@@ -30,33 +33,44 @@ def instancias_a_partir_do_np() -> None:
         "random":   np.random.rand(3, 4),
         "torch_from_numpy": torch.from_numpy(np.random.rand(3, 4))
     }
-    print("\n Instâncias vindas do Numpy")
+    print("\nInstâncias vindas do Numpy")
     for key in instancias_numpy:
         print(f"{key.capitalize()} - ({instancias_numpy[key].dtype})\n {instancias_numpy[key]}\n")
 
 
 def tensores_ja_inicializados() -> None:
+    """_summary_
+    Recebem como parâmetro o tamanho de cada dimensão do tensor
+    """
     print("\n Tensores inicializados com valores padrão")
-    tns1 = torch.ones(2, 3)  # tensor preenchido de .1 do tamanho 2 de [3]
-    print(f" Tensores .ones - {tns1}")
-    tns2 = torch.zeros(4, 3)  # tensor preenchido de 0 do tamanho 4 de [3]
-    print(f" Tensores .zeros - {tns2}")
-    tns3 = torch.randn(3, 2)
-    print(
-        f" Tensores .randn - {tns3}"
-    )  # tensor prenechido de valores aleatórios, tamanho 3 de [2]
-
+    tensores_iniciados = {
+        "Tensores .ones": torch.ones(2, 3), # tensor preenchido de .1 do tamanho 2 de [3]
+        "Tensores .zeros": torch.zeros(4, 3),  # tensor preenchido de 0 do tamanho 4 de [3]
+        "Tensores .randn": torch.randn(3, 2) # tensor prenechido de valores aleatórios, tamanho 3 de [2]
+    }
+    for key in tensores_iniciados:
+        print(f"{key} - {tensores_iniciados[key]}")
 
 def tensor_p_numpy() -> None:
-    tnsr = torch.randn(3, 2)
-    print(type(tnsr))
-    arr = tnsr.data.numpy()
-    print(type(arr))
+    print(f"\nTensores pra numpy")
+    tensores_numpy = {
+        "tipo_torch": torch.randn(3, 2),
+        "tipo_np": torch.randn(3, 2).data.numpy()
+    }
+    for key in tensores_numpy:
+        print(f"{key} - {type(tensores_numpy[key])}")
 
 
-def indexao(tensor) -> None:
+def indexao(lista:List) -> None:
+    """_summary_
+    Consegue reorganizar os tensores, de forma semelahnte a arrays Numpy
+    Faz isso através de colchetes
+    
+    Args:
+        lista (List): lista a ser convertida em tensor
+    """
     print(f"\nExemplo indexao")
-    tensor = torch.Tensor(tensor)
+    tensor = torch.Tensor(lista)
     print(f"tensor não fatiado {tensor}")
     tensor[0, 2] = -10  # tensor 0D
     print(f"tensor com indice editado {tensor}")
@@ -65,7 +79,7 @@ def indexao(tensor) -> None:
 
 
 def operacoes() -> None:
-    """
+    """_summary_
     A função .item() extrai o número de um tensor que possui um único valor,
     permitindo realizar as operações numéricas do Python.
     Caso o item não seja extraído,
@@ -85,7 +99,7 @@ def operacoes() -> None:
 
 
 def size_e_view() -> None:
-    """
+    """_summary_
     Uma operação importantíssima na manipulação	 de tensores para Deep Learning é a reorganização das suas dimensões.
     Dessa forma é possível linearizar um tensor n-dimensional
     """
@@ -100,10 +114,8 @@ def size_e_view() -> None:
 
 
 def cast_gpu() -> None:
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-    else:
-        device = torch.device("cpu")
+    print(f"\nExemplo de cast GPU")
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     print(device)
     tns = torch.randn(10)
     tns = tns.to(device)
@@ -111,9 +123,10 @@ def cast_gpu() -> None:
 
 
 def exercicio() -> None:
-    """
+    """_summary_
     No exemplo isso funciona pq eles partiram de um tensor de mesma dimensionalidade
     """
+    print(f"\nResultado do exercício")
     tns = torch.randn(9, 12)
     tns1 = tns[0:5, 0:4]
     tns2 = tns[5:, 4:]
