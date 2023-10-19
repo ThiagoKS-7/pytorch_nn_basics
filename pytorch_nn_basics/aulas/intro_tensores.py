@@ -1,13 +1,25 @@
 from utils import Aula
 import torch
-from typing import List
+from typing import Union, List
 import numpy as np
 
 class AulaTensores(Aula):
     def __init__(self,lista:List):
         self.lista = lista
         self.res = ""
-    def mostra_conteudo_sobre(self, conteudo: str) -> None:
+        
+        self.mostra_conteudo_sobre([
+            self.tipos_tensores(),
+            self.instancias_a_partir_do_np(),
+            self.tensores_ja_inicializados(),
+            self.tensor_p_numpy(),
+            self.indexao(),
+            self.operacoes(),
+            self.size_e_view(),
+            self.cast_gpu(),
+        ])
+        
+    def mostra_conteudo_sobre(self, conteudo: Union[str, List[str]]) -> None:
         return super().mostra_conteudo_sobre(conteudo) 
     
     def tipos_tensores(self) -> str:
