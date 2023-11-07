@@ -28,6 +28,8 @@ class AulaPerceptron(Aula):
         # y = (-a*x)/b
         x = np.linspace(-2, 4, 50)
         y = (-a * x) / b
+        plt.plot(x, y)
+        plt.grid(True)
         plt.savefig("./assets/reta1.png")
         self.res = str(x) + "\n" + str(y) + "\n" + "gráfico salvo em assets/reta1.png"
         return f"Equação da reta|" + self.res
