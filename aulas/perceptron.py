@@ -15,7 +15,8 @@ class AulaPerceptron(Aula):
         self.mostra_conteudo_sobre([
             self.equacao_da_reta(-2, 3, 0.4),
             self.distrbuicao_aleatoria(),
-            self.plotmodel(5,1,0.4)
+            self.plotmodel(5,1,0.4),
+            self.classify((2,-1), 5,1,0.4)
             ])
 
     def mostra_conteudo_sobre(self, conteudo: Union[str, List[str]]) -> None:
@@ -23,7 +24,7 @@ class AulaPerceptron(Aula):
 
     def equacao_da_reta(self, a, b, c):
         """
-        É aprendida na forma ax+by+c, mas para nos adequarmos às nomenclaturas de redes neurais,
+        É aprendida na forma ax+by+c = 0, mas para nos adequarmos às nomenclaturas de redes neurais,
         podemos reescrever essa equação como w1x1 + w2x2 + b. Ou seja, w1,w2 e b são parâmetros que definem um modelo linear,
         a reta
         """
@@ -57,8 +58,28 @@ class AulaPerceptron(Aula):
         plt.scatter(X[:,0], X[:,1], marker='o', c=Y, edgecolor='k')
         plt.axvline(0,-1,1,color='k', linewidth=1)
         plt.axhline(0,-2,4,color='k', linewidth=1)
-        plt.plot(x,y)
+       
         plt.grid(True)
         plt.savefig("./assets/modelo_reta.png")
+        plt.close()
         self.res = str(x) + "\n" + str(y) + "\n" + "gráfico salvo em assets/modelo_reta.png"
         return f"Modelo da reta|" + self.res
+    
+    def classify(self, ponto,w1,w2,b):
+        """
+        ax+by+c = 0
+        Para classifcar um ponto
+        """
+        ret = w1*ponto[0] + w2*ponto[1] + b
+        self.res = "yellow" if ret > 0 else "blue"
+        X,Y = make_classification(n_features=2, n_redundant=0, n_informative=1, n_clusters_per_class=1)
+        
+        plt.scatter(X[:,0], X[:,1], marker='o', c=Y, edgecolor='k')
+        plt.axvline(0,-1,1,color='k', linewidth=1)
+        plt.axhline(0,-2,4,color='k', linewidth=1)
+       
+        plt.grid(True)
+        plt.plot(ponto[0],ponto[1], marker="^", color="green", markersize=30)
+        plt.savefig("./assets/classif.png")
+        return f"Classificacao da reta|" + self.res
+  
